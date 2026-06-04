@@ -1,4 +1,4 @@
-# negativenumbers
+# negativenumbers_7_1_1
 Grails 7.1.1 application with domain containing long and bigdecimal fields for demonstrating bug in edit, update and save negative numbers when browser has locale set to nb-NO.
 
 This is the second iteration of the bug. There are still issues with the update and save operations.
@@ -95,3 +95,6 @@ I copied the LocaleAwareNumberConverter into a new LoggingLocaleAwareNumberConve
 
 ## LoggingLocaleAwareBigDecimalConverter notes
 The LoggingLocaleAwareBigDecimalConverter is a copy of LocaleAwareBigDeciamlConverter. The only difference is added logging.
+
+## AI assistance
+I used Junie to help locate the issue in grails, wire up the LoggingConverters and test the application.
