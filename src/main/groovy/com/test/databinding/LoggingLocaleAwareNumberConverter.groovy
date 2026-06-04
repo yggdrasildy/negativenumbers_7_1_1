@@ -53,8 +53,6 @@ class LoggingLocaleAwareNumberConverter implements ValueConverter {
          * parsedNumber
          */
         String stringValue = value?.toString()?.trim()
-        logNumberFormatter('en_US')
-        logNumberFormatter('de_DE')
         NumberFormat numberFormatter = getNumberFormatter()
         ParsePosition position = new ParsePosition(0)
 
@@ -98,11 +96,17 @@ class LoggingLocaleAwareNumberConverter implements ValueConverter {
         parsedNumber
     }
 
+    /**
+     * replaces minus prefix of stringValue if stringValue is prefixed with '-' and the localeMinusSign is not '-'
+     * @param numberFormatter
+     * @param stringValue
+     * @return
+     */
     protected String convertToLocaleMinusIfNecessary(NumberFormat numberFormatter, String stringValue) {
         if (numberFormatter instanceof DecimalFormat && stringValue?.startsWith('-')) {
-            String localeMinus = ((DecimalFormat) numberFormatter).decimalFormatSymbols.minusSign
-            if (localeMinus != '-') {
-                stringValue = localeMinus + stringValue.substring(1)
+            String localeMinusSign = ((DecimalFormat) numberFormatter).decimalFormatSymbols.minusSign
+            if (localeMinusSign != '-') {
+                stringValue = localeMinusSign + stringValue.substring(1)
             }
         }
         stringValue

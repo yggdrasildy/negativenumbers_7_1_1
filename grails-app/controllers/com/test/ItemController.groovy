@@ -31,17 +31,9 @@ class ItemController {
             notFound()
             return
         }
-        logItem(item, 'autoPopulated')
+        logItem(item, 'save.autoPopulated')
         logParams(params)
-        logBindingErrors(item, 'afterAutoPopulate')
-        if (!item.validate()) {
-            log.error('!validated')
-            logBindingErrors(item, 'afterValidate')
-            item = new Item(name: params.name as String)
-            item.stock = Long.parseLong(params.stock as String)
-            item.itemValue = new BigDecimal((params.itemValue as String).replaceAll(',', '.'))
-            logItem(item, 'manuallyPopulated')
-        }
+        logBindingErrors(item, 'save.afterAutoPopulate')
         try {
             itemService.save(item)
         } catch (ValidationException e) {
@@ -70,7 +62,9 @@ class ItemController {
             return
         }
 
+        logItem(item, 'update.autoPopulated')
         logParams(params)
+        logBindingErrors(item, 'update.afterAutoPopulate')
 
         try {
             itemService.save(item)
